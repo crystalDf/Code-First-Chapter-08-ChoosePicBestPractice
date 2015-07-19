@@ -120,16 +120,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case PICK_PHOTO:
-                Uri fromImageUri = null;
-                if (data != null) {
-                    fromImageUri = data.getData();
-                }
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(fromImageUri, "image/*");
-                intent.putExtra("scale", true);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+                if (resultCode == RESULT_OK) {
+                    Uri fromImageUri = null;
+                    if (data != null) {
+                        fromImageUri = data.getData();
+                    }
+                    Intent intent = new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(fromImageUri, "image/*");
+                    intent.putExtra("scale", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
 
-                startActivityForResult(intent, CROP_PHOTO);
+                    startActivityForResult(intent, CROP_PHOTO);
+                }
                 break;
             default:
                 break;
